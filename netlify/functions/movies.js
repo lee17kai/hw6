@@ -29,7 +29,9 @@ exports.handler = async function(event) {
       body: `Error! You must define year or genre to proceed.` // a string of data
     }
   }
+  //if year and genre is defined, 
   else {
+    //create a new object that consists of number of results and array of movie objects
     let returnValue = {
       numResults: 0,
       movies: []
