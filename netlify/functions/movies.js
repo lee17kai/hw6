@@ -21,11 +21,7 @@ exports.handler = async function(event) {
   // 🔥 hw6: your recipe and code starts here!
   let year = event.queryStringParameters.startYear
   let genre = event.queryStringParameters.genres
-  console.log(year)
 
-  //define the url you want to use for the data
-  let url = `https://localhost:65182/.netlify/functions/movies?year=${year}&genre=${genre}`
-  
   //return error message if either year or genre is undefined
   if (year == undefined || genre == undefined) {
     return {
