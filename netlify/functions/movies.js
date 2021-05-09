@@ -19,9 +19,12 @@ exports.handler = async function(event) {
   console.log(moviesFromCsv)
 
   // 🔥 hw6: your recipe and code starts here!
-  let year = event.queryStringParameters.year
-  let genre = event.queryStringParameters.genre
+  let year = event.queryStringParameters.startYear
+  let genre = event.queryStringParameters.genres
   console.log(year)
+
+  //define the url you want to use for the data
+  let url = `https://localhost:65182/.netlify/functions/movies?year=${year}&genre=${genre}`
   
   if (year == undefined || genre == undefined) {
     return {
