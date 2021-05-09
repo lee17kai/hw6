@@ -26,10 +26,11 @@ exports.handler = async function(event) {
   //define the url you want to use for the data
   let url = `https://localhost:65182/.netlify/functions/movies?year=${year}&genre=${genre}`
   
+  //return error message if either year or genre is undefined
   if (year == undefined || genre == undefined) {
     return {
       statusCode: 200, // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-      body: `Nope!` // a string of data
+      body: `Error! You must define year or genre to proceed.` // a string of data
     }
   }
   else {
