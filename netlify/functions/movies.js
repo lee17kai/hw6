@@ -19,8 +19,8 @@ exports.handler = async function(event) {
   console.log(moviesFromCsv)
 
   // 🔥 hw6: your recipe and code starts here!
-  let year = event.queryStringParameters.startYear
-  let genre = event.queryStringParameters.genres
+  let year = event.queryStringParameters.year
+  let genre = event.queryStringParameters.genre
 
   //return error message if either year or genre is undefined
   if (year == undefined || genre == undefined) {
@@ -45,25 +45,35 @@ exports.handler = async function(event) {
     for (let i=0; i < moviesFromCsv.length; i++) {
 
       //store each movie in memory
-      let movieTemp = moviesFromCsv[i]
+      let movie = moviesFromCsv[i]
+      console.log(movie.primaryTitle)
 
-      //we only include if genre and runtime is NOT equal to \\N AND if the genre/year match
-      // the parameters
-      if(movieTemp.genres != "\\N" && movieTemp.runtimeMinutes != "\\N" && 
-      movieTemp.genres == genre && movieTemp.startYear == year){
+      // //Create new movie object containing the necessary fields
+      // let movieObject = {
+      //   title: movie.primaryTitle,
+      //   releaseYear: movie.startYear,
+      //   genres: movie.genres
+      // }
 
-        //add one to the count of results
-        returnValue.numResults = returnValue.numResults + 1
+      // //we only include if genre and runtime is NOT equal to \\N AND if the genre/year match
+      // // the parameters
+      // if(movie.genres != `\\N` && movie.runtimeMinutes != `\\N` && 
+      //   movie.genres.includes(genre) && movie.startYear == year){
 
-        //add the movie to the list of movies to return
-        returnValue.movies.push(movieTemp)
+      //   //add one to the count of results
+      //   returnValue.numResults = returnValue.numResults + 1
+
+      //   //add the movie to the list of movies to return
+      //   returnValue.movies.push(movieObject)
+     // }
+      
+      //a lambda function returns a status code and a string of data
+      return {
+      statusCode: 200, // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+      body: JSON.stringify(returnValue) // a string of data
       }
     }
 
-    // a lambda function returns a status code and a string of data
-    return {
-      statusCode: 200, // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-      body: JSON.stringify(returnValue) // a string of data
-    }
+
   }
 }
