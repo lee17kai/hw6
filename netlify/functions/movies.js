@@ -29,7 +29,8 @@ exports.handler = async function(event) {
       body: `Error! You must define year or genre to proceed.` // a string of data
     }
   }
-  //if year and genre is defined, 
+  //if year and genre is defined, require the API to pass 2 query string parameters and 
+  // then provide resutls for the given year and genre 
   else {
     //create a new object that consists of number of results and array of movie objects
     let returnValue = {
@@ -37,14 +38,31 @@ exports.handler = async function(event) {
       movies: []
     }
 
+    //use a for loop to go through the movies csv data, seeing if it matches the query string
+    //parameter. if it does, add it to the list
+    // if genre or run time is equal to \\N, we ignore this result
     for (let i=0; i < moviesFromCsv.length; i++) {
 
+      //store each movie in memory
+      let movieTemp = moviesFromCsv[i]
+
+      //we only include if genre and runtime is NOT equal to \\N AND if the genre/year match
+      // the parameters
+      if(movieTemp.genres != "\\N" && movieTemp.runtimeMinutes != "\\N" && 
+      movieTemp.genres == genre && movieTemp.startYear == year){
+
+        //add one to the count of results
+        returnValue.numResults = returnValue.numResults + 1
+
+        //add the movie to the list of movies to return
+        returnValue.movies.push(movieTemp)
+      }
     }
 
     // a lambda function returns a status code and a string of data
     return {
       statusCode: 200, // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-      body: `Hello from the back-end!` // a string of data
+      body: JSON.stringify(returnValue) // a string of data
     }
   }
 }
