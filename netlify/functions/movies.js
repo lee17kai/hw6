@@ -32,6 +32,7 @@ exports.handler = async function(event) {
   //if year and genre is defined, require the API to pass 2 query string parameters and 
   // then provide resutls for the given year and genre 
   else {
+
     //create a new object that consists of number of results and array of movie objects
     let returnValue = {
       numResults: 0,
