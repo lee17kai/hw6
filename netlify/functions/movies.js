@@ -37,7 +37,7 @@ exports.handler = async function(event) {
     }
   }
   //if year and genre is defined, require the API to pass 2 query string parameters and 
-  // then provide resutls for the given year and genre 
+  // then provide results for the given year and genre 
   else {
     //use a for loop to go through the movies csv data, seeing if it matches the query string
     //parameter. if it does, add it to the list
