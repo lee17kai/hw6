@@ -1,0 +1,1 @@
+# hw6 This is our 6th hw assignment where we were asked to create a JSON-based API for javascript developers to use. Important to note, the parameters when entering into the URL are case-sensitive, and you must use proper capitalizaiton (e.g., "Romance" not "romance).
