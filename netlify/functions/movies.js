@@ -16,9 +16,11 @@ exports.handler = async function(event) {
   let moviesFromCsv = await csv(moviesFile)
 
   // write the movies to the back-end console, check it out
-  //console.log(moviesFromCsv)
+  console.log(moviesFromCsv)
 
   // 🔥 hw6: your recipe and code starts here!
+
+  // get the query string parameters
   let year = event.queryStringParameters.year
   let genre = event.queryStringParameters.genre
 
@@ -31,7 +33,7 @@ exports.handler = async function(event) {
   if (year == undefined || genre == undefined) {
     return {
       statusCode: 200, // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-      body: `Error! You must define year or genre to proceed.` // a string of data
+      body: `Error! You must define year and genre to proceed.` // a string of data
     }
   }
   //if year and genre is defined, require the API to pass 2 query string parameters and 
@@ -51,8 +53,8 @@ exports.handler = async function(event) {
         releaseYear: movie.startYear,
         genres: movie.genres
       }
-      // //we only include if genre and runtime is NOT equal to \\N AND if the genre/year match
-      // // the parameters
+      // we only include if genre and runtime is NOT equal to \\N AND if the genre/year match
+      // the parameters
       if(movie.genres != `\\N` && movie.runtimeMinutes != `\\N` && 
         movie.genres.includes(genre) && movie.startYear == year){
 
